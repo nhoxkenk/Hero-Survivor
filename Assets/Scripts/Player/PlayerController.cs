@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseCharacterController
 {
     private PlayerActions playerActions;
 
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
         }
 
         playerActions.Enable();
+
+        SetupCharacter();
     }
 
     private void OnDisable()
@@ -38,9 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        CalculateMovementInputSmoothing();
-        playerMovement.UpdateMovementData(smoothInputMovement);
-        playerAnimator.UpdateMovementAnimation(smoothInputMovement.magnitude);
+        CharacterMovement();
     }
 
     private void FixedUpdate()
@@ -52,5 +52,18 @@ public class PlayerController : MonoBehaviour
     {
         rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
         smoothInputMovement = Vector3.Lerp(smoothInputMovement, rawInputMovement, movementSmoothingSpeed * Time.deltaTime);
+    }
+
+    public override void CharacterMovement()
+    {
+        CalculateMovementInputSmoothing();
+        playerMovement.UpdateMovementData(smoothInputMovement);
+        playerAnimator.UpdateMovementAnimation(smoothInputMovement.magnitude);
+    }
+
+    public override void SetupCharacter()
+    {
+        Transform characterTransform = Instantiate(characterData.characterModel).transform;
+        characterTransform.SetParent(transform, false);
     }
 }
