@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BulletType
+public enum SpawnState
 {
-    Continues,
-    Discrete,
-    Around
+    SPAWNING = 0,
+    WAITING = 1,
+    COUNTING = 2
 }

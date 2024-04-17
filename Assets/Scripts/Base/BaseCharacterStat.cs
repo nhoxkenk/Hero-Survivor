@@ -6,10 +6,14 @@ using UnityEngine;
 public class BaseCharacterStat : MonoBehaviour, IDamageable
 {
     [Header("Stats")]
-    protected float maxHealth;
-    protected float currentHealth;
-    protected bool isDead;
+    public float maxHealth;
+    public float currentHealth;
+    public bool isDead;
+    public float damage;
     public event Action<float, float> HealthChanged;
+
+    [SerializeField]
+    protected BaseCharacterController characterController;
 
     public void TakeDamage(float damage)
     {
@@ -25,6 +29,14 @@ public class BaseCharacterStat : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
+        SetupStats();
+    }
+
+    private void SetupStats()
+    {
+        characterController = GetComponent<BaseCharacterController>();
+        damage = characterController.characterData.characterDamage;
+        maxHealth = characterController.characterData.characterHealth;
         currentHealth = maxHealth;
     }
 

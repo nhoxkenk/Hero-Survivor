@@ -9,14 +9,20 @@ public class CameraFollow : MonoBehaviour
     [Range(0f, 1f)]
     public float smoothness = 0.5f;
 
+    private PlayerController playerController;
+
     private void Start()
     {
         cameraOffset = transform.position - targetToFollow.position;
+        playerController = targetToFollow.GetComponent<PlayerController>();
     }
 
     private void LateUpdate()
     {
-        Vector3 position = targetToFollow.position + cameraOffset;
-        transform.position = Vector3.Slerp(transform.position, position, smoothness);
+        if (!playerController.playerStat.Die())
+        {
+            Vector3 position = targetToFollow.position + cameraOffset;
+            transform.position = Vector3.Slerp(transform.position, position, smoothness);
+        }
     }
 }

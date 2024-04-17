@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCharacterShooting : MonoBehaviour
+public enum WeaponType
 {
-    
+    Continues,
+    Discrete,
+    Around
 }
