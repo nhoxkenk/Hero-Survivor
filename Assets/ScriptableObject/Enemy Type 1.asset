@@ -15,5 +15,5 @@ MonoBehaviour:
   characterFaction: 1
   characterModel: {fileID: 0}
   characterDamage: 5
-  characterHealth: 20
+  characterHealth: 25
   characterSpeed: 3

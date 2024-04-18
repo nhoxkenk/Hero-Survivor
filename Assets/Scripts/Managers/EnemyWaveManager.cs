@@ -29,26 +29,29 @@ public class EnemyWaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(state == SpawnState.WAITING)
+        if(GameManager.Instance.state == GameState.Decide)
         {
-            if(EnemyIsAlive())
+            if (state == SpawnState.WAITING)
             {
-                return;
+                if (EnemyIsAlive())
+                {
+                    return;
+                }
+                WaveCompleted();
             }
-            WaveCompleted();
-        }
 
-        if(waveCountdown <= 0f)
-        {
-            if(state != SpawnState.SPAWNING)
+            if (waveCountdown <= 0f)
             {
-                StartCoroutine(SpawnWave(waves[nextWaveIndex]));
+                if (state != SpawnState.SPAWNING)
+                {
+                    StartCoroutine(SpawnWave(waves[nextWaveIndex]));
+                }
             }
-        }
-        else
-        {
-            waveCountdown -= Time.deltaTime;
-        }
+            else
+            {
+                waveCountdown -= Time.deltaTime;
+            }
+        } 
     }
 
     private void WaveCompleted()

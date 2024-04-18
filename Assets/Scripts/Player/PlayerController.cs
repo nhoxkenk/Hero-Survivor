@@ -103,5 +103,7 @@ public class PlayerController : BaseCharacterController
     {
         Transform characterTransform = Instantiate(characterData.characterModel).transform;
         characterTransform.SetParent(transform, false);
+
+        characterStat.OnDie += GameManager.Instance.PlayerDie;
     }
 }

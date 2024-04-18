@@ -24,8 +24,9 @@ public class BaseCharacterStat : MonoBehaviour, IDamageable
         {
             isDead = true;
             currentHealth = 0;
-            Destroy(gameObject);
             OnDie?.Invoke();
+            gameObject.SetActive(false);
+            Destroy(gameObject,1);  
         }
 
         HealthChanged?.Invoke(currentHealth, maxHealth);

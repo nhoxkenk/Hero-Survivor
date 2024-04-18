@@ -12,6 +12,10 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private int maxProgressValue = 10;
     [SerializeField] private TextMeshProUGUI currentHealthText;
     [SerializeField] private TextMeshProUGUI maxHealthText;
+    [SerializeField] private GameObject victoryCanvas;
+    [SerializeField] private GameObject loseCanvas;
+
+    [SerializeField] private TextMeshProUGUI timerCountDown;
 
     public event Action ExperienceBarFull;
 
@@ -33,6 +37,20 @@ public class UIManager : Singleton<UIManager>
 
         GameManager.Instance.playerController.playerStat.HealthChanged += HandleHealthChanged;
     }
+
+    private void Update()
+    {
+        if (GameManager.Instance.state == GameState.Win)
+        {
+            victoryCanvas.SetActive(true);
+        }
+        else if (GameManager.Instance.state == GameState.Lose)
+        {
+            loseCanvas.SetActive(true);
+        }
+        timerCountDown.text = GameManager.Instance.timeCountDown.ToString();
+    }
+
 
     public void HandleOnCollect()
     {
