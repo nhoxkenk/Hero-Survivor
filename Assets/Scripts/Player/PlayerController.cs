@@ -36,12 +36,15 @@ public class PlayerController : BaseCharacterController
         playerActions.Disable();
     }
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimator = GetComponent<PlayerAnimator>();
         playerStat = GetComponent<PlayerStat>();
         playerCombat = GetComponent<PlayerCombat>();
+
+        playerMovement.movementSpeed = characterData.characterSpeed;
     }
 
     private void Update()

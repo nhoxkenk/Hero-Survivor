@@ -11,6 +11,7 @@ public class BaseCharacterStat : MonoBehaviour, IDamageable
     public bool isDead;
     public float damage;
     public event Action<float, float> HealthChanged;
+    public event Action OnDie;
 
     [SerializeField]
     protected BaseCharacterController characterController;
@@ -18,16 +19,19 @@ public class BaseCharacterStat : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        HealthChanged?.Invoke(currentHealth, maxHealth);
+        
         if(currentHealth <= 0)
         {
             isDead = true;
             currentHealth = 0;
             Destroy(gameObject);
+            OnDie?.Invoke();
         }
+
+        HealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         SetupStats();
     }

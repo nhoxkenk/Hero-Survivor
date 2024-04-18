@@ -249,6 +249,7 @@ MonoBehaviour:
   countDownTime: 1
   isCounting: 0
   targetTransform: {fileID: 0}
+  collectableExperience: {fileID: 4289268269843368592, guid: cc0b7643d28b7e24487ff73805456d8f, type: 3}
 --- !u!114 &8141086118088286591
 MonoBehaviour:
   m_ObjectHideFlags: 0

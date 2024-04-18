@@ -16,4 +16,4 @@ MonoBehaviour:
   characterModel: {fileID: 1735578086321599907, guid: 47ad6a8ff81edee4092ad13bceb158dc, type: 3}
   characterDamage: 10
   characterHealth: 100
-  characterSpeed: 5
+  characterSpeed: 10
